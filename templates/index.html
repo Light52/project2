@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+	Flack: Home
+{% endblock %}
+
+{% block body %}
+<div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalLabel">Welcome to Flack!</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>
+					Looks like you are new here, please enter a username:
+				</p>
+				<form class="form-inline" id="form-user">
+					<label class="sr-only" for="new-username">Username</label>
+					<input type="text" class="form-control mb-2 mr-sm-2" id="new-username" placeholder="New Username">
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="create-username" class="btn btn-primary" data-dismiss="modal">Submit</button>
+				<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+	<p id="show-users"></p>
+	<h4>Add Channels</h4>
+	<ul id="channels">
+		<!-- {% for channel in list_channels %}
+			<li>channel</li>
+		{% endfor %} -->
+	</ul>
+	<form id="new-channel">
+		<input id="channel" autocomplete="off" autofocus placeholder="New Channel" type="text">
+		<input id="create" type="submit">
+	</form>
+{% endblock %}
