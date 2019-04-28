@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, session, render_template
+from flask_jsglue import JSGlue
 from flask_session import Session
 from flask_socketio import SocketIO, emit
 from models import *
@@ -8,7 +9,7 @@ from models import *
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
-
+jsglue = JSGlue(app)
 #initialize a list of empty channels
 list_channels = []
 
@@ -16,9 +17,9 @@ list_channels = []
 def index():
     return render_template("index.html")
 
-# @app.route("/<str:chanel_name>", methods = ["POST", "GET"])
-# 	def channel(channel_name):
-# 		return render_template("channel.html", channel_name=channel_name)
+@app.route("/<string:channel_name>", methods = ["POST", "GET"])
+def channel(channel_name):
+	return render_template("channel.html", channel_name=channel_name)
 """
 -if channel already exists, return an error.html instead
 -if channel does not exist, return success.html, and append the channel to list_channels.

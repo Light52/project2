@@ -1,5 +1,6 @@
 from datetime import datetime
 
+#create a class for channels to keep track of the messages inside of it
 class Channel:
 
 	channels_dic = {}
@@ -22,7 +23,7 @@ class Channel:
 		for message in self.messages:
 			print(message)
 
-
+#create a class for all the messages users will type in each chat
 class Message:
 	def __init__(self, username, text):
 		self.username = username

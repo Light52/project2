@@ -2,6 +2,7 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='index.js') }}"></script>
+{{ JSGlue.include() }}
 {% endblock %}
 
 {% block heading %}

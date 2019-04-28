@@ -1,4 +1,8 @@
 
+// url for channel
+function create_url(my_channel) {
+	return "{{ url_for('channel', channel_name=#channel#) }}".replace('#channel#', my_channel);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	//initialize username variable
@@ -72,11 +76,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		//when a new channel is created
 		socket.on('new channel created', data => {
-			const li = document.createElement('li');
-			li.innerHTML = `${data.channel}`;
-
-			//add new channel to list
+			var new_channel = `${data.channel}`
+			var url = Flask.url_for("channel", {"channel_name": new_channel})
+			var li = document.createElement('li');
+			li.innerHTML = `<a href = ${url}>${new_channel}</a>`;
+			// li.innerHTML = "<a href={{ url_for('channel', channel_name='' }}" + new_channel + '>' + new_channel + '</a>';
 			document.querySelector('#channels').append(li);
+
+						// new_channel = `${data.channel}`
+			// var li = document.createElement('li');
+			// var a = document.createElement('a');
+			// var ul = document.querySelector('#channels');
+			// var link = create_url(new_channel);
+			// var links = [link, "test.html"]
+			//
+			// a.href = links[0];
+			// a.innerText = new_channel;
+			// ul.appendChild(li);
+			// li.appendChild(a);
+
+
+			// link.setAttribute('href', create_url(new_channel));
+			// link.innerHTML = "Link Here";
+
+			//check what this does!
+			// document.body.appendChild(link);
+
+
+			// const li = document.createElement('li');
+			// li.innerHTML = `${data.channel}`;
+			// //add new channel to list
+			// document.querySelector('#channels').append(li);
+
 
 		});
 
@@ -85,5 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 	});
+
 
 });
