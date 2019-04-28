@@ -12,9 +12,15 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY") or \
 socketio = SocketIO(app)
 jsglue = JSGlue(app)
 
+#configure session to use filesystem
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
 #initialize a list of empty channels
 # channel_list = []
 channels_dic = {}
+uid = ''
 
 @app.route("/")
 def index():
@@ -48,6 +54,10 @@ def create_username(data):
 	new_username = data["username"]
 	session["username"] = new_username
 	print(session.get("username"))
+	#update username
+	global uid
+	uid = new_username
+	# print(uid)
 
 #user trying to create channel
 @socketio.on("create channel")
@@ -72,15 +82,14 @@ def create_channel(data):
 @socketio.on("new message")
 def new_message(data):
 	msg = data["msg"]
-	user = session.get("username")
-	new_msg = Message(username = user, text = msg)
+	# uid = session["username"]
+	new_msg = Message(username = uid, text = msg)
 	t = "{} \n Sent by {} at {}".format(new_msg.text, new_msg.username, new_msg.time)
 	emit("new message sent", {"msg": t}, broadcast = True)
 	# cur_channel = data["cur_channel"]
 	# #add message to current channel
 	# channels_dic[cur_channel].add_message(new_msg)
 	ch = session.get("channel_name")
-	print(user)
 	channels_dic[ch].add_message(new_msg)
 
 if __name__ == "__main__":
