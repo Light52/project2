@@ -2,7 +2,6 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='index.js') }}"></script>
-{{ JSGlue.include() }}
 {% endblock %}
 
 {% block heading %}
@@ -38,11 +37,17 @@
 </div>
 	<p id="show-users"></p>
 	<h4>Add Channels</h4>
+
 	<ul id="channels">
-		<!-- {% for channel in list_channels %}
-			<li>channel</li>
-		{% endfor %} -->
+		{% for ch in channels_dic %}
+			<li>
+				<a href="{{ url_for('channel', channel_name = ch) }}">
+				{{ ch }}
+				</a>
+			</li>
+		{% endfor %}
 	</ul>
+
 	<form id="new-channel">
 		<input id="channel" autocomplete="off" autofocus placeholder="New Channel" type="text">
 		<input id="create" type="submit">

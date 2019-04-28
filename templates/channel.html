@@ -1,9 +1,26 @@
 {% extends "layout.html" %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='channel.js') }}"></script>
+{% endblock %}
+
 {% block heading %}
 	Channel
 {% endblock %}
 
 {% block body %}
-	<p>{{ channel_name }} is the site!</p>
+	<h4 id="current-channel">{{ channel_name }}</h4>
+
+	<ul id="list-messages">
+		{% for message in messages %}
+			<li>
+				{{ message }}
+			</li>
+		{% endfor %}
+	</ul>
+
+	<form id="form-message">
+		<input id="message" autocomplete="off" autofocus placeholder="New Message" type="text">
+		<input id="send-message" type="submit">
+	</form>
 {% endblock %}

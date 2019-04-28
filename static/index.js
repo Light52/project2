@@ -1,8 +1,8 @@
 
 // url for channel
-function create_url(my_channel) {
-	return "{{ url_for('channel', channel_name=#channel#) }}".replace('#channel#', my_channel);
-}
+// function create_url(my_channel) {
+// 	return "{{ url_for('channel', channel_name=#channel#) }}".replace('#channel#', my_channel);
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
 	//initialize username variable
@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			//when user submits username, save it to local storage
 			document.querySelector("#create-username").onclick = function() {
 
-				//save username user enters
 				username = document.querySelector('#new-username').value;
 				//send username to server to save it in session var
 				socket.emit('create username', {'username': username});
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			socket.emit('create channel', {'channel': channel});
 
 			// Clear input field and disable button again
-			document.querySelector('#channel').value = '';
+			document.querySelector('#channel').innerText = '';
 			document.querySelector('#create').disabled = true;
 
 			// Stop form from submitting

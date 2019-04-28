@@ -1,9 +1,10 @@
 from datetime import datetime
 
+# channels_dic = {}
+
 #create a class for channels to keep track of the messages inside of it
 class Channel:
 
-	channels_dic = {}
 	def __init__(self, name):
 
 		#Username
@@ -11,7 +12,8 @@ class Channel:
 
 		#keep track of the messages allocated to the channel.
 		self.messages = []
-		Channel.channels_dic[name] = self
+
+		# channels_dic[name] = self
 
 	def add_message(self,m):
 		#if over 100 messages, remove the first message
@@ -22,6 +24,12 @@ class Channel:
 	def print_messages(self):
 		for message in self.messages:
 			print(message)
+
+	def __repr__(self):
+		return self.name
+
+	# def __eq__(self, other):
+	# 	return self.name == other.name
 
 #create a class for all the messages users will type in each chat
 class Message:
@@ -41,7 +49,7 @@ def main():
 	m1 = Message(username = "wow", text= "Great!")
 	m2 = Message(username = "second", text= "Good second Message!")
 
-
+	#channels_dic["test"].add_message(m1)
 	test.add_message(m1)
 	test.add_message(m2)
 
